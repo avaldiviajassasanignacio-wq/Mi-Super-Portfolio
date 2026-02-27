@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aroy | Mega-Portfolio Profesional</title>
+    <style>
+        /* =========================================
+           1. VARIABLES GLOBALES Y RESET (Calidad de Código)
+           ========================================= */
+        :root {
+            --bg-principal: #f8f9fa;
+            --bg-secundario: #ffffff;
+            --bg-oscuro: #1a1a2e;
+            --texto-principal: #222222;
+            --texto-claro: #f8f9fa;
+            --acento: #0a84ff;
+            --acento-hover: #005bb5;
+            --borde: #e5e7eb;
+            --espacio: 16px;
+            --radio: 12px;
+            --sombra: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        html { box-sizing: border-box; scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: inherit; }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--texto-principal);
+            background: var(--bg-principal);
+            line-height: 1.6;
+        }
+
+        /* Accesibilidad: Estilos de foco para teclado */
+        a:focus, button:focus, input:focus, textarea:focus, .caja-demo:focus {
+            outline: 3px solid var(--acento);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* =========================================
+           2. NAVEGACIÓN Y HEADER
+           ========================================= */
+        header {
+            background: var(--bg-secundario);
+            padding: calc(var(--espacio) * 1.5) var(--espacio);
+            border-bottom: 1px solid var(--borde);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: var(--sombra);
+        }
+
+        header h1 { margin: 0 0 10px 0; color: var(--acento); }
+
+        nav ul {
+            list-style: none; margin: 0; padding: 0;
+            display: flex; justify-content: center; gap: var(--espacio); flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none; color: var(--texto-principal);
+            font-weight: 600; padding: 8px 16px; border-radius: var(--radio);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover { background: var(--acento); color: var(--texto-claro); }
+
+        /* =========================================
+           3. ESTRUCTURA PRINCIPAL Y SECCIONES
+           ========================================= */
+        main {
+            max-width: 1100px; margin: 0 auto; padding: calc(var(--espacio) * 2);
+        }
+
+        section {
+            background: var(--bg-secundario);
+            border-radius: var(--radio);
+            padding: calc(var(--espacio) * 2);
+            margin-bottom: 3rem;
+            box-shadow: var(--sombra);
+            border: 1px solid var(--borde);
+        }
+
+        .section-title {
+            border-bottom: 2px solid var(--acento);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            color: var(--texto-principal);
+            display: inline-block;
+        }
+
+        /* =========================================
+           4. SECCIÓN SOBRE MÍ Y HORARIO
+           ========================================= */
+        .perfil-container { text-align: center; margin-bottom: 2rem; }
+
+        .tabla-responsive { overflow-x: auto; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 12px; border: 1px solid var(--borde); text-align: center; }
+        th { background-color: #f1f3f5; }
+        tr:nth-child(even) { background-color: var(--bg-principal); }
+
+        /* =========================================
+           5. SECCIÓN TARJETAS INTERACTIVAS
+           ========================================= */
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+        }
+        .profile-card {
+            border: 2px solid var(--texto-principal); border-radius: 8px;
+            padding: 20px; position: relative; transition: transform 0.2s;
+        }
+        .profile-card:hover { transform: translateY(-5px); box-shadow: var(--sombra); }
+        .profile-card::before {
+            content: "★"; color: gold; position: absolute; left: 12px; top: -12px;
+            background: var(--bg-secundario); padding: 0 5px; font-size: 1.2rem;
+        }
+        .card-desc {
+            height: 80px; overflow-y: auto; background: var(--bg-principal);
+            padding: 10px; border-radius: 4px; border: 1px solid var(--borde); font-size: 0.9rem;
+        }
+        .mini-form { display: grid; gap: 10px; margin-top: 15px; border-top: 1px solid var(--borde); padding-top: 15px; }
+        .mini-form input { padding: 8px; border: 1px solid var(--borde); border-radius: 4px; }
+        .btn-card { background: var(--acento); color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
+
+        /* =========================================
+           6. SECCIÓN POSITION Y DISPLAY
+           ========================================= */
+        .caja-demo {
+            width: 100px; height: 50px; background-color: #aed581;
+            margin: 10px; display: inline-flex; align-items: center; justify-content: center;
+            border: 2px solid #33691e; font-weight: bold; border-radius: 4px; cursor: pointer;
+        }
+        .pos-relative { position: relative; top: 10px; left: 10px; background-color: #ffe082; }
+        .demo-container { background: #e8f4f8; padding: 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid var(--acento); }
+        .demo-el { background: #f39c12; color: white; padding: 10px; margin: 5px; border: 1px solid #d68910; text-align: center; }
+        .d-block .demo-el { display: block; }
+        .d-inline .demo-el { display: inline; width: 200px; /* Ignorado en inline */ }
+        .d-inline-block .demo-el { display: inline-block; width: 80px; }
+
+        /* =========================================
+           7. FORMULARIO DE CONTACTO Y FOOTER
+           ========================================= */
+        #formulario-contacto { display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto; }
+        #formulario-contacto label { font-weight: bold; }
+        #formulario-contacto input, #formulario-contacto textarea {
+            padding: 10px; border: 1px solid var(--borde); border-radius: 6px; font-family: inherit; font-size: 1rem; width: 100%;
+        }
+        .btn-submit {
+            background-color: var(--acento); color: white; border: none; padding: 12px 24px;
+            border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: bold; margin-top: 10px;
+        }
+        .btn-submit:hover { background-color: var(--acento-hover); }
+
+        footer { text-align: center; padding: 2rem; background: var(--bg-oscuro); color: var(--texto-claro); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN GLOBAL -->
+    <header>
+        <h1>Aroy</h1>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#tarjetas">Tarjetas</a></li>
+                <li><a href="#css-demo">Display & Position</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: SOBRE MÍ Y HORARIOS -->
+        <section id="sobre-mi">
+            <div class="perfil-container">
+                <h2 class="section-title">¡Hola! Soy Aroy</h2>
+                <p>Estudiante de 2º de Sistemas Microinformáticos y Redes. Este es mi portfolio definitivo donde recojo todo mi aprendizaje en Desarrollo de Aplicaciones Web: desde maquetación CSS hasta lógica interactiva con JavaScript.</p>
+            </div>
+
+            <h3>Mis Hobbies</h3>
+            <ul>
+                <li>Jugar videojuegos en mi tiempo libre.</li>
+                <li>Programar pequeños proyectos web.</li>
+                <li>Escuchar música relajante y explorar nuevas tecnologías.</li>
+            </ul>
+
+            <h3>Mi Horario Semanal</h3>
+            <div class="tabla-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>08:00 - 10:00</td><td>Estudiar</td><td>Clases</td><td>Estudiar</td><td>Clases</td><td>Descansar</td></tr>
+                        <tr><td>10:00 - 12:00</td><td>Programar</td><td>Programar</td><td>Deporte</td><td>Programar</td><td>Descansar</td></tr>
+                        <tr><td>12:00 - 14:00</td><td>Descansar</td><td>Planificar</td><td>Trabajar</td><td>Revisar</td><td>Leer</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: TARJETAS INTERACTIVAS -->
+        <section id="tarjetas">
+            <h2 class="section-title">Componentes: Tarjetas de Perfil</h2>
+            <p>Demostración de maquetación en tarjetas (CSS Grid/Flexbox) y formularios internos capturados con JS.</p>
+            
+            <div class="cards-grid">
+                <article class="profile-card">
+                    <h3 style="text-align: center; margin-top:0;">Aroy</h3>
+                    <div class="card-desc">Estudio segundo año de microinformática en el San Ignacio de Loyola. Me gusta jugar y programar.</div>
+                    <form class="mini-form">
+                        <input type="text" placeholder="Escribe tu nombre" required aria-label="Nombre para tarjeta Aroy">
+                        <button type="submit" class="btn-card">Saludar a Aroy</button>
+                    </form>
+                </article>
+
+                <article class="profile-card" style="border-color: #ff7043;">
+                    <h3 style="text-align: center; margin-top:0;">Liam</h3>
+                    <div class="card-desc">Hola soy Liam, me gusta programar en HTML y jugar videojuegos.</div>
+                    <form class="mini-form">
+                        <input type="text" placeholder="Escribe tu nombre" required aria-label="Nombre para tarjeta Liam">
+                        <button type="submit" class="btn-card">Saludar a Liam</button>
+                    </form>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EXPERIMENTOS CSS (POSITION & DISPLAY) -->
+        <section id="css-demo">
+            <h2 class="section-title">Teoría CSS: Position y Display</h2>
+            <p>Comprendiendo el flujo del documento. Haz clic en las cajas interactivas para disparar eventos JS.</p>
+            
+            <h3>1. Position</h3>
+            <div style="background: #f1f3f5; padding: 20px; border-radius: 8px; border: 1px solid var(--borde);">
+                <div class="caja-demo" tabindex="0">Static</div>
+                <div class="caja-demo pos-relative" tabindex="0">Relative</div>
+                <p><em>(Fixed y Absolute omitidos en este bloque para no romper el layout del Mega-Portfolio)</em></p>
+            </div>
+
+            <h3>2. Display</h3>
+            <h4>display: block (Ocupan todo el ancho)</h4>
+            <div class="demo-container d-block">
+                <span class="demo-el">Elemento A</span><span class="demo-el">Elemento B</span>
+            </div>
+
+            <h4>display: inline-block (Respetan ancho y se alinean)</h4>
+            <div class="demo-container d-inline-block">
+                <div class="demo-el">A</div><div class="demo-el">B</div><div class="demo-el">C</div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: FORMULARIO DE CONTACTO -->
+        <section id="contacto">
+            <h2 class="section-title">Contrátame</h2>
+            <p style="text-align: center;">¿Te ha gustado mi trabajo? Déjame un mensaje y me pondré en contacto contigo.</p>
+            
+            <form id="formulario-contacto">
+                <label for="nombre">Tu nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required />
+
+                <label for="email">Tu correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="correo@empresa.com" required />
+
+                <label for="mensaje">Tu mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Hablemos sobre tu próximo proyecto web..." required></textarea>
+
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aroy — Práctica 5.2 (Aplicaciones Web SMR)</p>
+        <p style="font-size: 0.9em; color: #aaa;">Todos los módulos y proyectos unificados en una sola "Single Page Application" simulada.</p>
+    </footer>
+
+    <!-- =========================================
+         SCRIPT GLOBAL (Optimización de Rendimiento)
+         ========================================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* --- LÓGICA: Formularios de Tarjetas --- */
+            const miniForms = document.querySelectorAll('.mini-form');
+            miniForms.forEach(form => {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const nombre = form.querySelector('input').value;
+                    alert(`¡Hola ${nombre}! Los datos se han capturado desde la tarjeta.`);
+                    form.reset();
+                });
+            });
+
+            /* --- LÓGICA: Cajas interactivas CSS --- */
+            const cajas = document.querySelectorAll('.caja-demo');
+            cajas.forEach(caja => {
+                caja.addEventListener('click', function() {
+                    const colorActual = this.style.backgroundColor;
+                    this.style.backgroundColor = 'white';
+                    setTimeout(() => this.style.backgroundColor = colorActual, 200);
+                    console.log("Interacción con caja CSS detectada.");
+                });
+                // Accesibilidad teclado
+                caja.addEventListener('keydown', function(e) {
+                    if(e.key === 'Enter') this.click();
+                });
+            });
+
+            /* --- LÓGICA: Formulario Principal --- */
+            const formPrincipal = document.getElementById('formulario-contacto');
+            formPrincipal.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const nom = document.getElementById('nombre').value;
+                alert(`¡Mensaje de ${nom} enviado con éxito! (Simulado mediante JS preventDefault)`);
+                formPrincipal.reset();
+            });
+
+        });
+    </script>
+</body>
+</html>
